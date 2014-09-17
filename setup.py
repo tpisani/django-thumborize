@@ -9,7 +9,7 @@ setup(
     author_email="pisani.thiago@gmail.com",
     url="https://github.com/tpisani/django-thumborize",
     license="BSD",
-    install_requires=["Django"],
+    install_requires=["Django", "libthumbor"],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
