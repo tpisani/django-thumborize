@@ -1,5 +1,5 @@
-from django.test import TestCase
+from django.test import SimpleTestCase
 
 
-class ThumborizeTests(TestCase):
+class ThumborizeTests(SimpleTestCase):
     pass
