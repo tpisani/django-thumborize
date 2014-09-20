@@ -1,4 +1,4 @@
 include LICENSE
 include README.rst
-recursive-exclude django_thumborize/tests *
+recursive-exclude thumborize/tests *
 recursive-exclude * *.py[co]
