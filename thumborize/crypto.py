@@ -1,7 +1,10 @@
 from libthumbor import CryptoURL
 
-crypto = CryptoURL(key="MY_SECURE_KEY")
+from thumborize import conf
+
+crypto = CryptoURL(key=conf.THUMBOR_SECURITY_KEY)
 
 
 def url(image_url, **kwargs):
-    return crypto.generate(image_url=image_url, **kwargs)
+    encrypted = crypto.generate(image_url=image_url, **kwargs)
+    return conf.THUMBOR_SERVER + encrypted
