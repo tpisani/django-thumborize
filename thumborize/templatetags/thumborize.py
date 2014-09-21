@@ -1,6 +1,6 @@
 from django.template import Library
 
-# Workaround to allow users to import thumborize package
+# Workaround to allow users to import thumborize
 # and load it's templatetags just about the same way.
 from .. import url
 
