@@ -13,4 +13,4 @@ install:
     - make install
 
 script:
-    - make tests
+    - make test
