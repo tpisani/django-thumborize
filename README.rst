@@ -40,10 +40,12 @@ Code
     from thumborize import ThumborURL
 
     # Filters as string.
-    thumbor_url = ThumborURL("http://path/to/image.png", width=320, filters="quality(80):grayscale()")
+    thumbor_url = ThumborURL("http://path/to/image.png", width=320,
+                             filters="quality(80):grayscale()")
 
     # Filters as list.
-    thumbor_url = ThumborURL("http://path/to/image.png", width=320, filters=["quality(80)", "grayscale()"])
+    thumbor_url = ThumborURL("http://path/to/image.png", width=320,
+                             filters=["quality(80)", "grayscale()"])
 
     # Filters as dict.
     thumbor_url = ThumborURL("http://path/to/image.png", width=320,
@@ -53,7 +55,7 @@ Code
                              })
 
     thumbor_url.generate()
-    'http://localhost:8888/DYStA-Xwisc37dVz7bdXZ3u63QI=/320x300/http://path/to/image.png'
+    'http://localhost:8888/JiuVg9d5Mry_kw4odvb5Zh1C_BY=/320x0/filters:quality(80):grayscale()/http://path/to/image.png'
 
 
 Shortcut:
