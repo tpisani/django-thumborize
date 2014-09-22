@@ -1,4 +1,4 @@
-from thumborize.crypto import url
+from thumborize.crypto import ThumborURL, url
 
 
-__all__ = ["url"]
+__all__ = ["ThumborURL", "url"]
