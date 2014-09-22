@@ -12,7 +12,6 @@ filter_pattern = re.compile("(?P<name>\w+)(?P<param>\(.*\))")
 
 
 class ThumborURL(object):
-
     """
     Manages arguments and options of thumbor URLs.
     """
