@@ -1,5 +1,4 @@
 include LICENSE
 include README.rst
-exclude Makefile
 recursive-exclude thumborize/tests *
 recursive-exclude * *.py[co]
