@@ -134,4 +134,4 @@ Run ``make install`` to install dev requirements.
 Run tests
 ---------
 
-Run ``make tests`` to run tests.
+Run ``make test`` to run tests.
