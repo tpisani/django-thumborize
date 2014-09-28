@@ -16,12 +16,13 @@ class ThumborURL(object):
     Manages arguments and options of thumbor URLs.
     """
 
-    def __init__(self, image_url, **options):
+    def __init__(self, image_url, reset_filters=False, **options):
         filters = options.pop("filters", {})
         self.image_url = image_url
         self.options = options
         self.filters = self._parse_filters(filters)
-        self._merge_filters()
+        if not reset_filters:
+            self._merge_filters()
 
     def _merge_filters(self):
         defaults = conf.THUMBOR_DEFAULT_FILTERS.copy()
@@ -61,5 +62,5 @@ def url(image_url, **options):
     """
     Small shortcut for generating URLs by ThumborURL.
     """
-    thumbor = ThumborURL(image_url, **options)
-    return thumbor.generate()
+    thumbor_url = ThumborURL(image_url, **options)
+    return thumbor_url.generate()
