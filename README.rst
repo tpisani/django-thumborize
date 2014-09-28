@@ -29,6 +29,9 @@ Flexible filters specification
 Filters can be either a string delimited by ``:``, a ``list`` or ``dict``. See usage for more.
 
 
+*For a full list of available filters, check* `thumbor's wiki <https://github.com/thumbor/thumbor/wiki/Filters>`_.
+
+
 Usage
 =====
 
@@ -58,7 +61,8 @@ Code
     'http://localhost:8888/JiuVg9d5Mry_kw4odvb5Zh1C_BY=/320x0/filters:quality(80):grayscale()/http://path/to/image.png'
 
 
-Shortcut:
+Code (shortcut)
+---------------
 
 .. code:: python
 
@@ -117,7 +121,6 @@ Configure basic thumbor settings:
     THUMBOR_DEFAULT_FILTERS = {
         "quality": "(80)",
         "grayscale": "()",
-        "rgb": "(20,-20,40)",
     }
 
 
