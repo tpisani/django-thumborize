@@ -44,8 +44,7 @@ class ThumborURL(object):
             return self._filters_dict(filters)
         elif isinstance(filters, dict):
             return filters
-        else:
-            raise TypeError("Filters must be either a string, iterable or dict.")
+        raise TypeError("Filters must be either a string, iterable or dict.")
 
     @property
     def filter_list(self):
