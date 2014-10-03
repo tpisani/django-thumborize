@@ -89,7 +89,7 @@ Templates
 Installation
 ============
 
-Install using **pip**
+Install using **pip**:
 
 ::
 
