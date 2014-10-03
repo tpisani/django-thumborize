@@ -4,6 +4,7 @@ from django.test import SimpleTestCase
 from django.test.utils import override_settings
 
 import thumborize
+from thumborize import ThumborURL
 
 
 class ThumborizeTests(SimpleTestCase):
@@ -35,4 +36,24 @@ class ThumborizeTests(SimpleTestCase):
         imp.reload(thumborize.conf)
         thumborized = thumborize.url("image.png", reset_filters=True, filters="quality(80)")
         self.assertNotIn("grayscale()", thumborized)
+        self.assertIn("quality(80)", thumborized)
+
+    def test_should_be_able_to_add_filters_as_string(self):
+        imp.reload(thumborize.conf)
+        thumbor_url = ThumborURL("image.png")
+        thumbor_url.add_filters("grayscale()")
+        thumborized = thumbor_url.generate()
+        self.assertIn("grayscale()", thumborized)
+
+    def test_should_be_able_to_remove_filters_as_string(self):
+        thumbor_url = ThumborURL("image.png", filters=["grayscale()", "quality(80)"])
+        thumbor_url.remove_filters("grayscale")
+        thumborized = thumbor_url.generate()
+        self.assertNotIn("grayscale()", thumborized)
+        self.assertIn("quality(80)", thumborized)
+
+    def test_should_be_able_to_add_filters_as_kwargs(self):
+        thumbor_url = ThumborURL("image.png")
+        thumbor_url.add_filters(quality="(80)")
+        thumborized = thumbor_url.generate()
         self.assertIn("quality(80)", thumborized)

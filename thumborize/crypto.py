@@ -22,9 +22,9 @@ class ThumborURL(object):
         self.options = options
         self.filters = self._parse_filters(filters)
         if not reset_filters:
-            self._merge_filters()
+            self._merge_default_filters()
 
-    def _merge_filters(self):
+    def _merge_default_filters(self):
         defaults = conf.THUMBOR_DEFAULT_FILTERS.copy()
         defaults.update(self.filters)
         self.filters = defaults
@@ -50,10 +50,19 @@ class ThumborURL(object):
     def filter_list(self):
         return ["{k}{v}".format(k=key, v=value) for key, value in self.filters.items()]
 
+    def add_filters(self, *filters, **kwfilters):
+        parsed = self._parse_filters(filters)
+        self.filters.update(parsed)
+        self.filters.update(kwfilters)
+
+    def remove_filters(self, *filters):
+        for key in filters:
+            self.filters.pop(key, None)
+
     def generate(self):
-        options = self.options.copy()
-        options["filters"] = self.filter_list
-        encrypted = crypto.generate(image_url=self.image_url, **options)
+        encrypted = crypto.generate(image_url=self.image_url,
+                                    filters=self.filter_list,
+                                    **self.options)
         return conf.THUMBOR_SERVER + encrypted
 
 
