@@ -2,6 +2,7 @@ import imp
 
 from django.test import SimpleTestCase
 from django.test.utils import override_settings
+from django.template import Template, Context
 
 import thumborize
 from thumborize import ThumborURL
@@ -57,3 +58,10 @@ class ThumborizeTests(SimpleTestCase):
         thumbor_url.add_filters(quality="(80)")
         thumborized = thumbor_url.generate()
         self.assertIn("quality(80)", thumborized)
+
+    def test_thumbor_url_should_render_as_string_on_templates(self):
+        thumbor_url = ThumborURL("image.png", width=400)
+        template = Template("{{ url }}")
+        context = Context({"url": thumbor_url})
+        rendered = template.render(context)
+        self.assertEqual(rendered, thumbor_url.generate())

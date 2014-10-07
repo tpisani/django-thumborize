@@ -24,6 +24,16 @@ class ThumborURL(object):
         if not reset_filters:
             self._merge_default_filters()
 
+    def __unicode__(self):
+        return self.generate()
+
+    def __str__(self):
+        return self.generate()
+
+    def __repr__(self):
+        return "<{classname}: {url}>".format(classname=self.__class__.__name__,
+                                             url=self.generate())
+
     def _merge_default_filters(self):
         defaults = conf.THUMBOR_DEFAULT_FILTERS.copy()
         defaults.update(self.filters)
