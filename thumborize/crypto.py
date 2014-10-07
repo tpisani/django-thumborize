@@ -34,6 +34,24 @@ class ThumborURL(object):
         return "<{classname}: {url}>".format(classname=self.__class__.__name__,
                                              url=self.generate())
 
+    def __getattr__(self, name):
+        def wrapper(*params):
+            clone = self._clone()
+            params = self._build_filter_params(*params)
+            clone.add_filters(**{name: params})
+            return clone
+        return wrapper
+
+    def _clone(self):
+        return self.__class__(self.image_url,
+                              filters=self.filter_list,
+                              **self.options)
+
+    def _build_filter_params(self, *params):
+        params = map(str, params)
+        params = ",".join(params)
+        return "({})".format(params)
+
     def _merge_default_filters(self):
         defaults = conf.THUMBOR_DEFAULT_FILTERS.copy()
         defaults.update(self.filters)

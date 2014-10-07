@@ -65,3 +65,16 @@ class ThumborizeTests(SimpleTestCase):
         context = Context({"url": thumbor_url})
         rendered = template.render(context)
         self.assertEqual(rendered, thumbor_url.generate())
+
+    def test_should_be_able_to_apply_filters_by_method_calling(self):
+        thumbor_url = ThumborURL("image.png")
+        gray_image = thumbor_url.grayscale()
+        self.assertIn("grayscale()", gray_image.generate())
+        low_quality_image = thumbor_url.quality(30)
+        self.assertIn("quality(30)", low_quality_image.generate())
+
+    def test_apply_filters_by_method_calling_should_be_chainable(self):
+        thumbor_url = ThumborURL("image.png")
+        new_image = thumbor_url.grayscale().quality(30)
+        self.assertIn("grayscale()", new_image.generate())
+        self.assertIn("quality(30)", new_image.generate())
