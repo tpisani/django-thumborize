@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-thumborize",
-    version="0.1",
+    version="1.0",
     description="Minimal interface for thumbor imaging service",
     packages=find_packages(),
     author="Thiago Pisani",
