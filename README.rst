@@ -4,7 +4,7 @@ django-thumborize
 
 .. image:: https://api.travis-ci.org/tpisani/django-thumborize.svg
 
-Provides shortcuts and conveniences for `thumbor <http://thumbor.org/>`_ imaging service.
+Minimal interface for `thumbor <http://thumbor.org/>`_ imaging service.
 
 
 Features
@@ -29,14 +29,17 @@ Flexible filters specification
 Filters can be either a string delimited by ``:``, a ``list`` or ``dict``. See usage for more.
 
 
+Chaining
+--------
+
+Easy, queryset like chaining for applying filters and resizing.
+
+
 *For a full list of available filters, check* `thumbor's wiki <https://github.com/thumbor/thumbor/wiki/Filters>`_.
 
 
 Usage
 =====
-
-Code
-----
 
 .. code:: python
 
@@ -61,8 +64,30 @@ Code
     'http://localhost:8888/JiuVg9d5Mry_kw4odvb5Zh1C_BY=/320x0/filters:quality(80):grayscale()/http://path/to/image.png'
 
 
-Code (shortcut)
----------------
+Chaining
+--------
+
+.. code:: python
+
+    from thumborize import ThumborURL
+
+    thumbor_url = ThumborURL("http://path/to/image.png")
+
+    small_gray_image = thumbor_url.grayscale().resize(width=100, height=100)
+
+    small_gray_image.generate()
+    'http://localhost:8888/RFsfJakG9BsJUcbY2l1M6D5tthQ=/100x100/filters:grayscale()/http://path/to/image.png'
+
+    low_quality_image = thumbor_url.quality(40).width(200)
+    'http://localhost:8888/SB1ILIArmGzsd90-Mz-TxJVHwqI=/200x0/filters:quality(40)/http://path/to/image.png'
+
+    # Original ThumborURL instance.
+    thumbor_url.generate()
+    'http://localhost:8888/O0Zqo6DMqqXHORdYncuspoaJlr0=/http://path/to/image.png'
+
+
+Shortcut
+--------
 
 .. code:: python
 
@@ -131,7 +156,7 @@ Testing
 Install
 -------
 
-Run ``make install`` to install dev requirements.
+First clone the repository, then run ``make install`` to install dev requirements.
 
 
 Run tests
