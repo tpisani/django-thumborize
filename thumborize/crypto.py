@@ -16,8 +16,7 @@ class ThumborURL(object):
     Manages arguments and options of thumbor URLs.
     """
 
-    def __init__(self, image_url, reset_filters=False, **options):
-        filters = options.pop("filters", {})
+    def __init__(self, image_url, reset_filters=False, filters={}, **options):
         self.image_url = image_url
         self.options = options
         self.filters = self._parse_filters(filters)
@@ -44,7 +43,7 @@ class ThumborURL(object):
 
     def _clone(self):
         return self.__class__(self.image_url,
-                              filters=self.filter_list,
+                              filters=self.filters,
                               **self.options)
 
     def _build_filter_params(self, *params):
@@ -68,10 +67,10 @@ class ThumborURL(object):
     def _parse_filters(self, filters):
         if isinstance(filters, basestring):
             return self._filters_dict(filters.split(":"))
-        elif isinstance(filters, Iterable):
-            return self._filters_dict(filters)
         elif isinstance(filters, dict):
             return filters
+        elif isinstance(filters, Iterable):
+            return self._filters_dict(filters)
         raise TypeError("Filters must be either a string, iterable or dict.")
 
     @property
