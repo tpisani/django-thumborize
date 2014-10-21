@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="django-thumborize",
     version="0.1",
-    description="Provides shortcuts and conveniences for thumbor imaging service",
+    description="Minimal interface for thumbor imaging service",
     packages=find_packages(),
     author="Thiago Pisani",
     author_email="pisani.thiago@gmail.com",
