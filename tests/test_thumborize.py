@@ -78,3 +78,9 @@ class ThumborizeTests(SimpleTestCase):
         new_image = thumbor_url.grayscale().quality(30)
         self.assertIn("grayscale()", new_image.generate())
         self.assertIn("quality(30)", new_image.generate())
+
+    def test_resizing_should_keep_not_overriden_dimensions(self):
+        thumbor_url = ThumborURL("image.png", width=300, height=150)
+        resized_image = thumbor_url.resize(width=150)
+        self.assertEqual(resized_image.options["width"], 150)
+        self.assertEqual(resized_image.options["height"], 150)

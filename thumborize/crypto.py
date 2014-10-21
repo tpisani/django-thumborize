@@ -86,6 +86,20 @@ class ThumborURL(object):
         for key in filters:
             self.filters.pop(key, None)
 
+    def resize(self, width=None, height=None):
+        clone = self._clone()
+        if width != None:
+            clone.options["width"] = width
+        if height != None:
+            clone.options["height"] = height
+        return clone
+
+    def width(self, value):
+        return self.resize(width=value)
+
+    def height(self, value):
+        return self.resize(height=value)
+
     def generate(self):
         encrypted = crypto.generate(image_url=self.image_url,
                                     filters=self.filter_list,
